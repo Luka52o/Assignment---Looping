@@ -102,12 +102,17 @@ namespace Assignment___Looping
 
         }
         public static List<int> scores = new List<int>();
+        public static int studentScore;
+        public static List<double> percentGrades = new List<double>();
+        public static double studentPercentGrade;
+        public static int studentsPassing = 0;
         public static void RunPercentPassing()
         {
             bool done = false;
-            int studentScore;
+           
             string doneInput;
-            double studentPercentGrade;
+            double percentPassing;
+            
             Console.WriteLine("Percent Passing selected. Please enter the maximum score of the evaluation");
             while (!Int32.TryParse(Console.ReadLine(), out max))
             {
@@ -125,17 +130,24 @@ namespace Assignment___Looping
                 {
                     scores.Add(studentScore);
                 }
-                else
+                else if (studentScore == -1)
                 {
                     done = true;
                 }
             }
             Console.WriteLine($"Scores added: {scores.Count}");
-            foreach (int i in scores)
+
+            for (int i = 1; i <= scores.Count; i++)
             {
-                List<double> percentGrades = new List<double>();
-                studentPercentGrade = studentScore / max;
+                percentGrades.Add(scores[i] / max);
+                Console.WriteLine(percentGrades[i]);
+                //if (percentGrades[i] >= 0.70)
+                //{
+                //    studentsPassing++;
+                //}
             }
+            percentPassing = studentsPassing / max;
+            Console.WriteLine($"{percentPassing}% of students passed the evaluation.");
         }
         public static void RunOddSum()
         {
