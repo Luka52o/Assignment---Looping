@@ -101,27 +101,24 @@ namespace Assignment___Looping
             }
 
         }
-        public static List<int> scores = new List<int>();
-        public static int studentScore;
-        public static List<double> percentGrades = new List<double>();
-        public static double studentPercentGrade;
-        public static int studentsPassing = 0;
+
+       // /////////////////////////////////////////////////////////////////////////////////////////////////////
         public static void RunPercentPassing()
         {
             bool done = false;
-           
-            string doneInput;
-            double percentPassing;
-            
+            double percentPassing, studentScore, maxGrade, studentsPassing = 0;
+            List<double> scores = new List<double>();
+            List<double> percentGrades = new List<double>();
+
             Console.WriteLine("Percent Passing selected. Please enter the maximum score of the evaluation");
-            while (!Int32.TryParse(Console.ReadLine(), out max))
+            while (!Double.TryParse(Console.ReadLine(), out maxGrade))
             {
                 Console.WriteLine("Please enter a valid integer for the maximum score of the evaluation");
             }
             Console.WriteLine("Now please enter each student's score individually, press ENTER after each score. Enter -1 when all grades have been entered.");
             while (!done)
             {
-                while (!Int32.TryParse(Console.ReadLine(), out studentScore))
+                while (!Double.TryParse(Console.ReadLine(), out studentScore))
                 {
                     Console.WriteLine("Please only enter integer values for scores.");
                     
@@ -137,25 +134,79 @@ namespace Assignment___Looping
             }
             Console.WriteLine($"Scores added: {scores.Count}");
 
-            for (int i = 1; i <= scores.Count; i++)
+            for (int i = 0; i < scores.Count; i++)
             {
-                percentGrades.Add(scores[i] / max);
+                percentGrades.Add(scores[i] / maxGrade);
                 Console.WriteLine(percentGrades[i]);
-                //if (percentGrades[i] >= 0.70)
-                //{
-                //    studentsPassing++;
-                //}
+                if (percentGrades[i] >= 0.70)
+                {
+                    studentsPassing++;
+                }
             }
-            percentPassing = studentsPassing / max;
+            percentPassing = Math.Round((studentsPassing / scores.Count) * 100, 1);
             Console.WriteLine($"{percentPassing}% of students passed the evaluation.");
         }
+
+        // /////////////////////////////////////////////////////////////////////////////////////////////////////
         public static void RunOddSum()
         {
+            int inputNumber, num;
+            List<int> ints = new List<int>();
+            Console.WriteLine("Odd Sum Selected. Please enter a number now.");
+            while(!Int32.TryParse(Console.ReadLine(), out inputNumber))
+            {
+                Console.WriteLine("Please enter a valid number with no decimal places.");
+            }
 
+            // determine if inputNumber is even or odd
+            if (inputNumber % 2 == 0)
+            {
+                num = inputNumber - 1;
+                ints.Add(num);
+                while (num != 1)
+                {
+                    num = num - 2;
+                    ints.Add(num);
+                }
+                Console.WriteLine($"The sum of every odd number less than your number, and your number itself is {ints.Sum() + inputNumber}.");
+            }
+            else
+            {
+                num = inputNumber - 2;
+                ints.Add(num);
+                while (num != 1)
+                {
+                    num = num - 2;
+                    ints.Add(num);
+                }
+                Console.WriteLine($"The sum of every odd number less than your number, and your number itself is {ints.Sum() + inputNumber}.");
+            }
         }
         public static void RunRandomNumbers()
         {
+            Random generator = new Random();
+            List<int> RandNums = new List<int>();
+            int rangeMax, rangeMin;
+            Console.WriteLine("Random Numbers Selected. The program will generate 25 random numbers within a range you input.");
+            Console.WriteLine("Please enter the maximum of your range:");
+            while (!Int32.TryParse(Console.ReadLine(), out rangeMax))
+            {
+                Console.WriteLine("Please enter a valid number with no decimal places.");
+            }
+            Console.WriteLine("Now please enter the minimum of your range");
+            while (!Int32.TryParse(Console.ReadLine(), out rangeMin))
+            {
+                Console.WriteLine("Please enter a valid number with no decimal places.");
+            }
+            for (int i = 1; i <= 25; i++)
+            {
+                generator.Next(rangeMin, rangeMax - 1);
+                RandNums.Add(i);
+            }
+            for (int i = 1; i <= RandNums.Count; i++)
+            {
 
+            }
         }
         public static void RunDiceGame()
         {
